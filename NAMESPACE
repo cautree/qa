@@ -2,3 +2,4 @@
 
 export(create_mz_rt_scatter_plots)
 export(get_CV)
+export(get_median_vs_running_order)

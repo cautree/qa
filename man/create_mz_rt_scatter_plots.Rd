@@ -2,7 +2,7 @@
 % Please edit documentation in R/mz_rt_scatter_plots.R
 \name{create_mz_rt_scatter_plots}
 \alias{create_mz_rt_scatter_plots}
-\title{Load a df}
+\title{create mz_rt scatter plot}
 \usage{
 create_mz_rt_scatter_plots(input_df)
 }
@@ -10,11 +10,8 @@ create_mz_rt_scatter_plots(input_df)
 \item{infile}{Path to the input file}
 }
 \value{
-A matrix of the infile
+a ggplot scatter plot
 }
 \description{
-This function loads a file as a matrix. It assumes that the first column
-contains the rownames and the subsequent columns are the sample identifiers.
-Any rows with duplicated row names will be dropped with the first one being
-kepted.
+This function loads a file as a dataframe.
 }

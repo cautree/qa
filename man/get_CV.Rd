@@ -10,7 +10,7 @@ get_CV(input_df)
 \item{input_df, }{input data frame.}
 }
 \value{
-a ggplot graph
+a ggplot line graph
 }
 \description{
 This function allows you to get metabolite CV.

@@ -1,11 +1,9 @@
 
-
-
 #' A get_CV function
 #'
 #' This function allows you to get metabolite CV.
 #' @param input_df, input data frame.
-#' @return a ggplot graph
+#' @return a ggplot line graph
 #' @export
 
 get_CV = function(input_df){
