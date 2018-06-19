@@ -5,9 +5,9 @@
 #'
 #' This function allows you to get metabolite CV.
 #' @param input_df, input data frame.
+#' @return a ggplot graph
 #' @export
-#' cat_function()
-#'
+
 get_CV = function(input_df){
 
 
@@ -20,12 +20,12 @@ get_CV = function(input_df){
   meta_names = rownames(pp_cv_t)
 
   pp_cv_t_M = data.matrix(pp_cv_t)
-  pp_cv_t = matrixStats::transform(pp_cv_t_M, SD=rowSds(pp_cv_t_M, na.rm=TRUE))
+  pp_cv_t =transform(pp_cv_t_M, SD=rowSds(pp_cv_t_M, na.rm=TRUE))
 
-  pp_cv_t$avg = matrixStats::rowMeans(pp_cv_t_M, na.rm = TRUE)
+  pp_cv_t$avg = rowMeans(pp_cv_t_M, na.rm = TRUE)
 
   pp_cv_t = pp_cv_t %>%
-    dplyr::mutate(CV = 100*coefficient.variation(SD, avg)) %>%
+    dplyr::mutate(CV = 100*FinCal::coefficient.variation(SD, avg)) %>%
     dplyr::mutate(ID= meta_names)
 
   rownames(pp_cv_t) = meta_names
