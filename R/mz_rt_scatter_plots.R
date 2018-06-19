@@ -1,19 +1,19 @@
 
 get_mz_ = function(s){
-  a=stringr::strsplit(s,"_")
+  a=strsplit(s,"_")
   b= a[[1]][3]
   return(b)
 }
 
 get_rt_ = function(s){
-  a=stringr::strsplit(s,"_")
+  a=strsplit(s,"_")
   b= a[[1]][4]
   return(b)
 }
 
 
 get_group_ = function(s){
-  a=stringr::strsplit(s,"_")
+  a=strsplit(s,"_")
   b= a[[1]][1]
   return(b)
 }
