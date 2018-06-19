@@ -28,6 +28,7 @@ get_group_ = function(s){
 #' @param infile Path to the input file
 #' @return A matrix of the infile
 #' @export
+#'
 
 create_mz_rt_scatter_plots = function(input_df) {
 
