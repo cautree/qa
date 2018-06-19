@@ -9,6 +9,9 @@ get_CV(input_df)
 \arguments{
 \item{input_df, }{input data frame.}
 }
+\value{
+a ggplot graph
+}
 \description{
 This function allows you to get metabolite CV.
 }
