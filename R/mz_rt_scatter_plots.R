@@ -40,9 +40,9 @@ create_mz_rt_scatter_plots = function(input_df) {
 
 
   df_mzrt = df_mzrt %>%
-    dplyr::mutate(mz=sapply(as.character(df_mzrt$`colnames(df_sample)`), get_mz_) ) %>%
-    dplyr::mutate(rt = sapply(as.character(df_mzrt$`colnames(df_sample)`), get_rt_) ) %>%
-    dplyr::mutate(group=sapply(as.character(df_mzrt$`colnames(df_sample)`), get_group_) ) %>%
+    dplyr::mutate(mz=sapply(as.character(df_mzrt$`colnames(df_data)`), get_mz_) ) %>%
+    dplyr::mutate(rt = sapply(as.character(df_mzrt$`colnames(df_data)`), get_rt_) ) %>%
+    dplyr::mutate(group=sapply(as.character(df_mzrt$`colnames(df_data)`), get_group_) ) %>%
     dplyr::mutate(mz= as.numeric(mz)) %>%
     dplyr::mutate(rt = as.numeric(rt))
 
@@ -52,5 +52,5 @@ create_mz_rt_scatter_plots = function(input_df) {
     ggplot2::geom_point()+
     ggplot2::ggtitle("scatter plot of mz and rt")
 
-  df_mzrt
+  ggplot2::ggsave( "mz_rt_scatter_plot.pdf")
 }
