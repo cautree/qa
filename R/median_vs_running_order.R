@@ -11,12 +11,14 @@
 
 get_median_vs_running_order = function(df_input) {
 
+  plate_well = df_input$plate_well
+
   df_sample = df_input %>%
-    dplyr::select(-year, -subjectId)
+    dplyr::select(-year, -subjectId, -plate_well)
 
   row_median = apply(df_sample, 1, median, na.rm = TRUE)
 
-  df_sample$plate_well = rownames(df_sample)
+  df_sample$plate_well = plate_well
 
   df_sample = df_sample %>%
     tidyr::separate(plate_well, c("plate", "well"))
