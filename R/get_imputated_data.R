@@ -28,7 +28,7 @@ get_imputated_data = function(  input_df) {
 
   colnames(df_data_new) =colnames(df_data)
 
-  res_df = merge(df_info, df_data, by=0)
+  res_df = merge(df_info, df_data_new, by=0)
 
   res_df$plate_well = res_df$Row.names
 
