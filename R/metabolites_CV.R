@@ -18,21 +18,21 @@ get_CV = function(input_df){
   meta_names = rownames(pp_cv_t)
 
   pp_cv_t_M = as.matrix(pp_cv_t)
-  pp_cv_t =transform(pp_cv_t_M, SD=matrixStats::rowSds(pp_cv_t_M, na.rm=TRUE))
+  pp_cv_t2 = transform(pp_cv_t_M, SD=matrixStats::rowSds(pp_cv_t_M, na.rm=TRUE))
 
-  pp_cv_t$avg = rowMeans(pp_cv_t_M, na.rm = TRUE)
+  pp_cv_t2$avg = rowMeans(pp_cv_t_M, na.rm = TRUE)
 
-  pp_cv_t = pp_cv_t %>%
+  pp_cv_t3 = pp_cv_t2 %>%
     dplyr::mutate(CV = 100*FinCal::coefficient.variation(SD, avg)) %>%
     dplyr::mutate(ID= meta_names)
 
-  rownames(pp_cv_t) = meta_names
+  rownames(pp_cv_t3) = meta_names
 
-  pp_cv_t = pp_cv_t %>%
+  pp_cv_t4 = pp_cv_t3 %>%
     dplyr::arrange(CV) %>%
     dplyr::mutate(percentage = round((1:dim(.)[1])*100/dim(.)[1], 4))
 
-  pp_cv_t %>%
+  pp_cv_t4 %>%
     ggplot2::ggplot(aes(percentage, CV)) +
     ggplot2::geom_point() +
     ggplot2::ggtitle("all PP metabolites CV vs rank")+
