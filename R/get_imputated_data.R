@@ -27,6 +27,7 @@ get_imputated_data = function(  input_df) {
   df_data_new =data.frame(Reduce(cbind, df_data_new))
 
   colnames(df_data_new) =colnames(df_data)
+  rownames(df_data_new) =rownames(df_data)
 
   res_df = merge(df_info, df_data_new, by=0)
 
