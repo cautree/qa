@@ -8,32 +8,21 @@
 
 get_CV = function(input_df){
 
-
   pp_cv = subset(input_df, is.na(subjectId))
 
   pp_cv = pp_cv %>%
     dplyr::select(-subjectId, -year, -plate_well)
 
-  pp_cv_t = as.data.frame(t(pp_cv))
-  meta_names = rownames(pp_cv_t)
+  cv_res = as.data.frame(sapply(pp_cv, raster::cv))
 
-  pp_cv_t_M = as.matrix(pp_cv_t)
-  print(dim(pp_cv_t_M))
-  pp_cv_t2 = transform(pp_cv_t_M, SD=matrixStats::rowSds(pp_cv_t_M, na.rm=TRUE))
+  names(cv_res) = c("CV")
 
-  pp_cv_t2$avg = rowMeans(pp_cv_t_M, na.rm = TRUE)
-
-  pp_cv_t3 = pp_cv_t2 %>%
-    dplyr::mutate(CV = 100*FinCal::coefficient.variation(SD, avg)) %>%
-    dplyr::mutate(ID= meta_names)
-
-  rownames(pp_cv_t3) = meta_names
-
-  pp_cv_t4 = pp_cv_t3 %>%
+  cv_res = cv_res %>%
     dplyr::arrange(CV) %>%
     dplyr::mutate(percentage = round((1:dim(.)[1])*100/dim(.)[1], 4))
 
-  pp_cv_t4 %>%
+
+  cv_res %>%
     ggplot2::ggplot(aes(percentage, CV)) +
     ggplot2::geom_point() +
     ggplot2::ggtitle("all PP metabolites CV vs rank")+
@@ -43,5 +32,6 @@ get_CV = function(input_df){
     ggplot2::geom_hline(yintercept = 30, linetype = "dashed", color = "red")
 
   ggplot2::ggsave("metabolites_CV.pdf")
+
 
 }
