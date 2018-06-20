@@ -8,6 +8,11 @@
 #'
 make_t_SNE_graph_for_plate_effects = function(input_df) {
 
+
+  #only use sample, not pooled plasma
+  input_df = input_df %>%
+    dplyr::filter(!is.na(subjectId))
+
   rownames(input_df) = input_df$plate_well
 
   sample_df = input_df %>%

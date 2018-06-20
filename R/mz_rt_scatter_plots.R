@@ -29,6 +29,11 @@ get_group_ = function(s){
 create_mz_rt_scatter_plots = function(input_df) {
 
 
+  #only use sample, not pooled plasma
+  input_df = input_df %>%
+    dplyr::filter(!is.na(subjectId))
+
+
   df_data = input_df[,grep("mzid",colnames(input_df))]
 
 

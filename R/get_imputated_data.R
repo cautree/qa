@@ -9,6 +9,11 @@
 get_imputated_data = function(  input_df) {
 
 
+  #only use sample, not pooled plasma
+  input_df = input_df %>%
+    dplyr::filter(!is.na(subjectId))
+
+
 
   df_info = input_df[, c(1:3)]
   rownames(df_info ) = df_info $plate_well
