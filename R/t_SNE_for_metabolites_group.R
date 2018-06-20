@@ -16,7 +16,7 @@ make_t_SNE_graph_for_metabolites_group = function(input_df) {
 
   sample_df_t = as.data.frame(t(sample_df))
 
-  list= c("Eico_m","FFA","BA","FAH")
+  list= c("Eico_m","FFA","BA","FAH", "Other")
 
   p_vector =sapply(list, function(x)  length(rownames(sample_df_t)[grep(x, rownames(sample_df_t))])  )
 
