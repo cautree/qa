@@ -18,6 +18,7 @@ get_CV = function(input_df){
   meta_names = rownames(pp_cv_t)
 
   pp_cv_t_M = as.matrix(pp_cv_t)
+  print(dim(pp_cv_t_M))
   pp_cv_t2 = transform(pp_cv_t_M, SD=matrixStats::rowSds(pp_cv_t_M, na.rm=TRUE))
 
   pp_cv_t2$avg = rowMeans(pp_cv_t_M, na.rm = TRUE)
