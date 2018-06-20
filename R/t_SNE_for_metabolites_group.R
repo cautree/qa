@@ -33,10 +33,12 @@ make_t_SNE_graph_for_metabolites_group = function(input_df) {
                 initial_dims = 200, perplexity=30, eta=100, verbose=TRUE,
                 max_iter = 500 , pca_scale=TRUE)
 
+  pdf('tsne for metabolites group.pdf')
+
   plot(tsne$Y, t='n', main="tsne for metabolites group (each label is a metabolite)")
   text(tsne$Y, labels=sample_df_t$labels, col=colors[sample_df_t$labels])
 
-
+  dev.off()
 
 
 }
