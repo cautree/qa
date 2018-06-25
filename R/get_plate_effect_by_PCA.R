@@ -36,7 +36,7 @@ get_plate_effect_by_PCA= function( input_df) {
   plate = as.factor(group_name)
 
 
-  pca = factoextra::prcomp(sample_df, center = TRUE, scale = TRUE)
+  pca = prcomp(sample_df, center = TRUE, scale = TRUE)
 
 
   scores <- data.frame(group_name, pca$x[,1:3])
