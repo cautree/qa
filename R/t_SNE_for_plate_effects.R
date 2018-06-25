@@ -19,15 +19,15 @@ make_t_SNE_graph_for_plate_effects = function(input_df) {
     dplyr::select(-year, -subjectId, -plate_well)
 
 
-  sample_df_t = as.data.frame(t(sample_df))
-
-  list= c("Eico_m","FFA","BA","FAH", "Other")
-
-  p_vector =sapply(list, function(x)  length(rownames(sample_df_t)[grep(x, rownames(sample_df_t))])  )
-
-  group_name = unlist(mapply(rep, list, p_vector))
-
-  sample_df_t$labels = as.factor(group_name)
+  # sample_df_t = as.data.frame(t(sample_df))
+  #
+  # list= c("Eico_m","FFA","BA","FAH", "Other")
+  #
+  # p_vector =sapply(list, function(x)  length(rownames(sample_df_t)[grep(x, rownames(sample_df_t))])  )
+  #
+  # group_name = unlist(mapply(rep, list, p_vector))
+  #
+  # sample_df_t$labels = as.factor(group_name)
 
   plates = sapply (input_df$plate_well, function(x) {strsplit(x, "_")[[1]][[1]]} )
   plate_count =length(unique(plates))
