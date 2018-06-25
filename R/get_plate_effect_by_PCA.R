@@ -9,11 +9,13 @@
 
 get_plate_effect_by_PCA= function( input_df) {
 
-  rownames(input_df) =input_df$plate_well
-
   sample_df = input_df %>%
     dplyr::filter(!is.na(subjectId)) %>%
-    dplyr::select(-plate_well, -subjectId, -year)
+    dplyr::select(-subjectId, -year)
+
+  rownames(sample_df) = sample_df$plate_well
+
+  sample_df$plate_well = NULL
 
 
   # replace NA with 0.25 of min
@@ -34,7 +36,6 @@ get_plate_effect_by_PCA= function( input_df) {
 
 
   plate = as.factor(group_name)
-
 
   pca = prcomp(sample_df, center = TRUE, scale = TRUE)
 
