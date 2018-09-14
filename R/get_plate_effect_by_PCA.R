@@ -7,7 +7,7 @@
 #' @export
 #'
 
-get_plate_effect_by_PCA= function( input_df) {
+get_plate_effect_by_PCA= function( input_df, df_name) {
 
   sample_df = input_df %>%
     dplyr::filter(!is.na(subjectId)) %>%
@@ -48,7 +48,7 @@ get_plate_effect_by_PCA= function( input_df) {
 
   g=gridExtra::grid.arrange(pc1.2,pc1.3,pc2.3 )
 
-  ggplot2::ggsave("PCA plate effect.png",
+  ggplot2::ggsave(paste(df_name, "PCA plate effect.png", sep=" "),
          g, width = 15, height = 30, units = "cm")
 
 

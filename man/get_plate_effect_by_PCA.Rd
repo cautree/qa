@@ -4,7 +4,7 @@
 \alias{get_plate_effect_by_PCA}
 \title{A get_plate_effect_by_PCA function}
 \usage{
-get_plate_effect_by_PCA(input_df)
+get_plate_effect_by_PCA(input_df, df_name)
 }
 \arguments{
 \item{input_df, }{input data frame.}
