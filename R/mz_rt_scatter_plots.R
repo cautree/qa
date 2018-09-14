@@ -26,7 +26,7 @@ get_group_ = function(s){
 #' @export
 #'
 
-create_mz_rt_scatter_plots = function(input_df) {
+create_mz_rt_scatter_plots = function(input_df, df_name) {
 
 
   #only use sample, not pooled plasma
@@ -53,5 +53,5 @@ create_mz_rt_scatter_plots = function(input_df) {
     ggplot2::geom_point()+
     ggplot2::ggtitle("scatter plot of mz and rt")
 
-  ggplot2::ggsave( "mz_rt_scatter_plot.pdf")
+  ggplot2::ggsave( paste(df_name, "mz_rt_scatter_plot.pdf", sep=" ") )
 }

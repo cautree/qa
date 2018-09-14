@@ -4,7 +4,7 @@
 \alias{create_mz_rt_scatter_plots}
 \title{create mz_rt scatter plot}
 \usage{
-create_mz_rt_scatter_plots(input_df)
+create_mz_rt_scatter_plots(input_df, df_name)
 }
 \arguments{
 \item{infile}{Path to the input file}
