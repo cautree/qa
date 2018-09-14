@@ -4,7 +4,7 @@
 \alias{get_CV}
 \title{A get_CV function}
 \usage{
-get_CV(input_df)
+get_CV(input_df, df_name)
 }
 \arguments{
 \item{input_df, }{input data frame.}

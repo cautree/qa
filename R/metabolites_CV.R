@@ -6,11 +6,16 @@
 #' @return a ggplot line graph
 #' @export
 
-get_CV = function(input_df){
+get_CV = function(input_df, df_name){
 
 
 
   pp_cv = subset(input_df, is.na(subjectId))
+
+
+  if(dim(pp_cv)[1]==0){
+    pp_cv = input_df
+  }
 
   pp_cv = pp_cv %>%
     dplyr::select(-subjectId, -year, -plate_well)
@@ -33,7 +38,7 @@ get_CV = function(input_df){
     ggplot2::geom_hline(yintercept = 20, linetype = "dashed", color = "red") +
     ggplot2::geom_hline(yintercept = 30, linetype = "dashed", color = "red")
 
-  ggplot2::ggsave("metabolites_CV.pdf")
+  ggplot2::ggsave(paste(df_name, "metabolites_CV.pdf", sep = " ") )
 
 
 }
