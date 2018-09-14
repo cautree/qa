@@ -9,7 +9,7 @@
 #' @return a ggplot scatter graph
 #' @export
 
-get_median_vs_running_order = function(df_input) {
+get_median_vs_running_order = function(df_input, df_name) {
 
   plate_well = df_input$plate_well
 
@@ -34,6 +34,6 @@ get_median_vs_running_order = function(df_input) {
     ggplot2::ggtitle("metabolite_median vs analysis order of samples")+
     ggplot2::theme(plot.title = element_text(hjust = 0.5))
 
-  ggsave("median_vs_running_order.pdf")
+  ggsave(paste(df_name, "median_vs_running_order.pdf", sep=" ") )
 
 }

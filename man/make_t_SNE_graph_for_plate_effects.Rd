@@ -4,7 +4,7 @@
 \alias{make_t_SNE_graph_for_plate_effects}
 \title{A make_t_SNE_graph_for_plate_effects function}
 \usage{
-make_t_SNE_graph_for_plate_effects(input_df)
+make_t_SNE_graph_for_plate_effects(input_df, df_name)
 }
 \arguments{
 \item{input_df, }{input data frame.}

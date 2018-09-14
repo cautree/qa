@@ -6,7 +6,7 @@
 #' @return a r baseplot scatter plot graph
 #' @export
 #'
-make_t_SNE_graph_for_plate_effects = function(input_df) {
+make_t_SNE_graph_for_plate_effects = function(input_df, df_name) {
 
 
   #only use sample, not pooled plasma
@@ -54,7 +54,7 @@ make_t_SNE_graph_for_plate_effects = function(input_df) {
 
   par(mfrow=c(3,1))
 
-  pdf('tsne for plate effect.pdf')
+  pdf(paste( df_name, 'tsne for plate effect.pdf', sep=" " ) )
   plot(tsne$Y[,1], tsne$Y[,2], t='n', main="tsne for plate effect, dim1 vs dim2(each label is a well)")
   text(tsne$Y[,1], tsne$Y[,2], labels=sample_df$labels, col=colors[sample_df$labels])
 

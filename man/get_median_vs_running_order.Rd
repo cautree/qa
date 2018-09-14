@@ -4,7 +4,7 @@
 \alias{get_median_vs_running_order}
 \title{A median_vs_running_order function}
 \usage{
-get_median_vs_running_order(df_input)
+get_median_vs_running_order(df_input, df_name)
 }
 \arguments{
 \item{input_df, }{input data frame.}
