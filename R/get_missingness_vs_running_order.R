@@ -5,7 +5,7 @@
 #' @return a ggplot line graph
 #' @export
 
-get_missingness_vs_running_order = function(input_df ) {
+get_missingness_vs_running_order = function(input_df,df_name ) {
 
   rownames(input_df) = input_df$plate_well
 
@@ -76,7 +76,7 @@ get_missingness_vs_running_order = function(input_df ) {
                                                     name = "missing percentage out of total"), limits = c(0, dim(sample_df)[1]))
 
 
-  ggplot2::ggsave("sample missingness.pdf")
+  ggplot2::ggsave(paste(df_name, "sample missingness.pdf", sep = " "))
 
   na_count_pp %>%
     ggplot(aes(rank, miss, color= subgroup)) +
@@ -86,7 +86,8 @@ get_missingness_vs_running_order = function(input_df ) {
                        sec.axis = sec_axis(~ . * 1 / dim(df_pp)[1] ,
                                            name = "missing percentage out of total"), limits = c(0, dim(df_pp)[1]))
 
-  ggplot2::ggsave("pp missingness.pdf")
+  ggplot2::ggsave(paste(df_name, "pp missingness.pdf", sep = " "))
+
   }
 
 
@@ -117,7 +118,7 @@ get_missingness_vs_running_order = function(input_df ) {
                          sec.axis = sec_axis(~ . * 1 / dim(df_pp)[1] ,
                                              name = "missing percentage out of total"), limits = c(0, dim(df_pp)[1]))
 
-    ggplot2::ggsave("pp missingness.pdf")
+    ggplot2::ggsave(paste(df_name, "pp missingness.pdf", sep = " "))
 
 
 

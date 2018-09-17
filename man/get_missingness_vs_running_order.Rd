@@ -4,7 +4,7 @@
 \alias{get_missingness_vs_running_order}
 \title{A get_missingness_vs_running_order function}
 \usage{
-get_missingness_vs_running_order(input_df)
+get_missingness_vs_running_order(input_df, df_name)
 }
 \arguments{
 \item{input_df, }{input data frame.}
