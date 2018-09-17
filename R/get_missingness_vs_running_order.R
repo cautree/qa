@@ -11,6 +11,8 @@ get_missingness_vs_running_order = function(input_df ) {
 
   df_pp = subset(input_df, is.na(subjectId))
 
+  if( dim(df_pp)[1] != 0){
+
   df_pp = df_pp %>%
     dplyr::select(-subjectId, -year, -plate_well)
 
@@ -85,7 +87,41 @@ get_missingness_vs_running_order = function(input_df ) {
                                            name = "missing percentage out of total"), limits = c(0, dim(df_pp)[1]))
 
   ggplot2::ggsave("pp missingness.pdf")
+  }
 
+
+  else{
+
+    df_pp = input_df %>%
+      dplyr::select(-year, -subjectId, -plate_well)
+
+    df_pp <- df_pp[,colSums(is.na(df_pp))<nrow(df_pp)]
+
+    na_count_pp = as.data.frame(sapply(df_pp, function(y) sum(length(which(is.na(y))))))
+
+    names(na_count_pp) ="miss"
+
+    na_count_pp = na_count_pp %>%
+      dplyr::mutate(meta_name = rownames(.)) %>%
+      dplyr::arrange(miss) %>%
+      dplyr::mutate(rank= 1: dim(.)[1]) %>%
+      dplyr::mutate(percentage = 100*round(miss/dim(df_pp)[1], 3)) %>%
+      dplyr::mutate(subgroup = sapply(strsplit(meta_name, "_"), `[`, 1)) %>%
+      dplyr::mutate(group="pp")
+
+    na_count_pp %>%
+      ggplot(aes(rank, miss, color= subgroup)) +
+      geom_point() +
+      ggtitle("pp rank vs number of missing and missing percentage") +
+      scale_y_continuous(name = expression("missing percentage out of total"),
+                         sec.axis = sec_axis(~ . * 1 / dim(df_pp)[1] ,
+                                             name = "missing percentage out of total"), limits = c(0, dim(df_pp)[1]))
+
+    ggplot2::ggsave("pp missingness.pdf")
+
+
+
+  }
 
 
 }
