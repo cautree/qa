@@ -28,6 +28,7 @@ get_CV = function(input_df, df_name){
     dplyr::arrange(CV) %>%
     dplyr::mutate(percentage = round((1:dim(.)[1])*100/dim(.)[1], 4))
 
+  write.csv( cv_res, paste(df_name, "metabolites_CV.csv", sep = "_"))
 
   cv_res %>%
     ggplot2::ggplot(aes(percentage, CV)) +
