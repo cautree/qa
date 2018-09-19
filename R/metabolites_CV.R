@@ -36,11 +36,16 @@ get_CV = function(input_df, df_name){
     ggplot2::geom_point() +
     ggplot2::ggtitle("all PP metabolites CV vs rank")+
     ggplot2::geom_hline(yintercept = 5, linetype = "dashed", color = "red") +
+    geom_text(aes( 0, 5, label = 5, vjust = -1), size = 1)+
     ggplot2::geom_hline(yintercept = 10, linetype = "dashed", color = "red") +
+    geom_text(aes( 0, 10, label = 10, vjust = -1), size = 1)+
     ggplot2::geom_hline(yintercept = 20, linetype = "dashed", color = "red") +
+    geom_text(aes( 0, 20, label = 20, vjust = -1), size = 1)+
     ggplot2::geom_hline(yintercept = 30, linetype = "dashed", color = "red")
+    geom_text(aes( 0, 30, label = 30, vjust = -1), size = 1)
 
   ggplot2::ggsave(paste(df_name, "metabolites_CV.pdf", sep = " ") )
+
 
 
 }
