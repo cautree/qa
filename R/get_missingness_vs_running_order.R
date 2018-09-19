@@ -118,6 +118,8 @@ get_missingness_vs_running_order = function(input_df,df_name ) {
                          sec.axis = sec_axis(~ . * 1 / dim(df_pp)[1] ,
                                              name = "missing percentage out of total"), limits = c(0, dim(df_pp)[1]))
 
+    write.csv(na_count_pp,  paste(df_name, "pp missingness.csv", sep = "_"))
+
     ggplot2::ggsave(paste(df_name, "pp missingness.pdf", sep = " "))
 
 
