@@ -24,8 +24,9 @@ get_CV = function(input_df, df_name){
 
   names(cv_res) = c("CV")
 
+  cv_res = cv_res[order(cv_res$CV),,drop=FALSE]
+
   cv_res = cv_res %>%
-    dplyr::arrange(CV) %>%
     dplyr::mutate(percentage = round((1:dim(.)[1])*100/dim(.)[1], 4))
 
   write.csv( cv_res, paste(df_name, "metabolites_CV.csv", sep = "_"))
