@@ -2,7 +2,7 @@
 #' A get_CV function
 #'
 #' This function allows you to get metabolite CV.
-#' @param pp_meta_df
+#' @param pp_meta_df input data frame
 #' @return a ggplot line graph
 #' @export
 

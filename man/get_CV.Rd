@@ -6,6 +6,9 @@
 \usage{
 get_CV(pp_meta_df, df_name = "Vital")
 }
+\arguments{
+\item{pp_meta_df}{input data frame}
+}
 \value{
 a ggplot line graph
 }

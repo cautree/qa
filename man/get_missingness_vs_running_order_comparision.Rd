@@ -8,7 +8,11 @@ get_missingness_vs_running_order_comparision(sample_meta_data,
   pp_meta_data, df_name = "Vital")
 }
 \arguments{
-\item{sample_meta_data, }{pp_meta_data, input data frame.}
+\item{sample_meta_data, }{input data frame.}
+
+\item{pp_meta_data, }{input data frame.}
+
+\item{df_name, }{string for data set}
 }
 \value{
 a ggplot line graph

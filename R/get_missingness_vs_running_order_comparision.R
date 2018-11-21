@@ -1,7 +1,9 @@
 #' A get_missingness_vs_running_order_comparision function
 #'
 #' This function allows you to get see the missingness of samples and pp
-#' @param sample_meta_data, pp_meta_data, input data frame.
+#' @param sample_meta_data, input data frame.
+#' @param pp_meta_data, input data frame.
+#' @param df_name, string for data set
 #' @return a ggplot line graph
 #' @export
 
@@ -35,7 +37,7 @@ get_missingness_vs_running_order_comparision = function(sample_meta_data, pp_met
     dplyr::mutate(meta_name = rownames(.)) %>%
     dplyr::arrange(miss) %>%
     dplyr::mutate(rank= 1: dim(.)[1]) %>%
-    dplyr::mutate(percentage = 100*round(miss/dim(df_pp)[1], 3)) %>%
+    dplyr::mutate(percentage = 100*round(miss/dim(pp_df)[1], 3)) %>%
     dplyr::mutate(subgroup = sapply(strsplit(meta_name, "_"), `[`, 1)) %>%
     dplyr::mutate(group="pp")
 
