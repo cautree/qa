@@ -7,12 +7,14 @@
 #' @return a ggplot scatter graph
 #' @export
 
-get_median_vs_running_order = function(df_input,is_sample=TRUE, df_name) {
+get_median_vs_running_order = function(df_input,is_sample=TRUE, df_name="Vital") {
 
 
 
   df_sample = df_input %>%
     dplyr::select( -plate_well)
+
+  df_sample <- df_sample[,colSums(is.na(df_sample))<nrow(df_sample)]
 
   row_median = as.data.frame( apply(df_sample, 1, median, na.rm = TRUE))
 
