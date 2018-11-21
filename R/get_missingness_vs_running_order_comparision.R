@@ -11,6 +11,7 @@ get_missingness_vs_running_order_comparision = function(sample_meta_data, pp_met
 
   sample_df= sample_meta_data %>%
     dplyr::select(-plate_well)
+  print(dim(sample_df))
 
 
   na_count_samples  = as.data.frame(sapply(sample_df, function(y) sum(length(which(is.na(y))))))
@@ -30,6 +31,7 @@ get_missingness_vs_running_order_comparision = function(sample_meta_data, pp_met
 
   pp_df= pp_meta_data %>%
     dplyr::select(-plate_well)
+  print(dim(pp_df))
 
   na_count_pp = as.data.frame(sapply(pp_df, function(y) sum(length(which(is.na(y))))))
 
@@ -53,8 +55,9 @@ get_missingness_vs_running_order_comparision = function(sample_meta_data, pp_met
 
 
   na_count_samples %>%
-    ggplot2::ggplot(aes(rank, miss, color = group)) +
+    ggplot2::ggplot(aes(rank, miss, color = subgroup)) +
     ggplot2::geom_point() +
+    ggplot2::facet_wrap(~group)+
     ggplot2::ggtitle("rank vs number of missing and missing percentage") +
     ggplot2::scale_y_continuous(name = expression("missing percentage out of total"),
                                 sec.axis = sec_axis(~ . * 1 / dim(sample_df)[1] ,
