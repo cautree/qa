@@ -1,4 +1,4 @@
-#' A get_missingness_vs_running_order function_comparision
+#' A get_missingness_vs_running_order_comparision function
 #'
 #' This function allows you to get see the missingness of samples and pp
 #' @param sample_meta_data, pp_meta_data, input data frame.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_missingness_vs_running_order_comparision.R
 \name{get_missingness_vs_running_order_comparision}
 \alias{get_missingness_vs_running_order_comparision}
-\title{A get_missingness_vs_running_order function_comparision}
+\title{A get_missingness_vs_running_order_comparision function}
 \usage{
 get_missingness_vs_running_order_comparision(sample_meta_data,
   pp_meta_data, df_name = "Vital")
