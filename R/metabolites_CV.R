@@ -9,7 +9,7 @@
 get_CV = function(pp_meta_df, df_name="Vital"){
 
   input_df = pp_meta_df %>%
-    dplyr::select( -subjectId )
+    dplyr::select( -plate_well )
 
 
   cv_res = as.data.frame(sapply(input_df, raster::cv))
