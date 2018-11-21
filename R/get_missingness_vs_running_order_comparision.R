@@ -1,11 +1,11 @@
-#' A get_missingness_vs_running_order function
+#' A get_missingness_vs_running_order function_comparision
 #'
 #' This function allows you to get see the missingness of samples and pp
 #' @param sample_meta_data, pp_meta_data, input data frame.
 #' @return a ggplot line graph
 #' @export
 
-get_missingness_vs_running_order = function(sample_meta_data, pp_meta_data, df_name="Vital" ) {
+get_missingness_vs_running_order_comparision = function(sample_meta_data, pp_meta_data, df_name="Vital" ) {
 
   sample_df= sample_meta_data %>%
     dplyr::select(-plate_well)

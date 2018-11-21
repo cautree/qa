@@ -1,0 +1,45 @@
+---
+title: "help_file"
+output: html_document
+---
+
+
+
+
+
+```{r}
+
+sample_meta_data = readr::read_csv("/an/vital/metabolomics/QA/yliu/data_for_QA_package/sample_meta_data.csv")
+
+sample_info_data = readr::read_csv("/an/vital/metabolomics/QA/yliu/data_for_QA_package/sample_info_data.csv")
+
+sample_trt_data = readr::read_csv("/an/vital/metabolomics/QA/yliu/data_for_QA_package/trt_data.csv")
+
+
+#
+pp_meta_data = readr::read_csv( "/an/vital/metabolomics/QA/yliu/data_for_QA_package/pp_meta_data.csv")
+
+
+names(sample_meta_data)[1:5]
+
+
+sample_meta_data$X1= NULL
+
+sample_info_data$X1= NULL
+
+sample_trt_data$X1= NULL
+
+pp_meta_data$X1 =NULL
+
+
+```
+
+> list.files()
+ [1] "clinical_data.csv"                                                    "data_for_QA_package.Rproj"                                           
+ [3] "data.csv"                                                             "QA_package_data.Rmd"                                                 
+ [5] "sample_info_data.csv"                                                 "sample_meta_data.csv"                                                
+ [7] "statTarget_data"                                                      "trt_data.csv"                                                        
+ [9] "with_plate_well_data_with_newly_annotated_eico180111_VITAL_no_pp.csv" "with_plate_well_data_with_newly_annotated_eico180111_VITAL.csv"      
+> getwd()
+[1] "/an/vital/metabolomics/QA/yliu/data_for_QA_package"
+> 
