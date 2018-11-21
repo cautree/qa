@@ -2,11 +2,11 @@
 #' A get_CV function
 #'
 #' This function allows you to get metabolite CV.
-#' @param smaple_meta_df, sample_info_df
+#' @param sample_meta_df, sample_info_df
 #' @return a ggplot line graph
 #' @export
 
-get_CV = function(smaple_meta_df, sample_info_df, df_name="Vital"){
+get_CV = function(sample_meta_df, sample_info_df, df_name="Vital"){
 
   input_df = sample_meta_df %>%
     dplyr::left_join( sample_info_df, by ="plate_well") %>%
