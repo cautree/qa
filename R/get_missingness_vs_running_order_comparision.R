@@ -25,6 +25,8 @@ get_missingness_vs_running_order_comparision = function(sample_meta_data, pp_met
     dplyr::mutate(subgroup = sapply(strsplit(meta_name, "_"), `[`, 1)) %>%
     dplyr::mutate(group = "sample")
 
+  print(dim(na_count_samples))
+
 
   pp_df= pp_meta_data %>%
     dplyr::select(-plate_well)
@@ -40,6 +42,8 @@ get_missingness_vs_running_order_comparision = function(sample_meta_data, pp_met
     dplyr::mutate(percentage = 100*round(miss/dim(pp_df)[1], 3)) %>%
     dplyr::mutate(subgroup = sapply(strsplit(meta_name, "_"), `[`, 1)) %>%
     dplyr::mutate(group="pp")
+
+  print(dim(na_count_pp))
 
 
   na_count = rbind(na_count_samples, na_count_pp)
