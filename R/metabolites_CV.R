@@ -2,28 +2,20 @@
 #' A get_CV function
 #'
 #' This function allows you to get metabolite CV.
-#' @param input_df, input data frame.
+#' @param smaple_meta_df, sample_info_df
 #' @return a ggplot line graph
 #' @export
 
-get_CV = function(input_df, df_name){
+get_CV = function(smaple_meta_df, sample_info_df, df_name="Vital"){
+
+  input_df = sample_meta_df %>%
+    dplyr::left_join( sample_info_df, by ="plate_well") %>%
+    dplyr::filter( is.na(subjectId)) %>%
+    dplyr::select( -subjectId, -year, -plate_well )
 
 
-
-  pp_cv = subset(input_df, is.na(subjectId))
-
-
-  if(dim(pp_cv)[1]==0){
-    pp_cv = input_df
-  }
-
-  pp_cv = pp_cv %>%
-    dplyr::select(-subjectId, -year, -plate_well)
-
-  cv_res = as.data.frame(sapply(pp_cv, raster::cv))
-
+  cv_res = as.data.frame(sapply(input_df, raster::cv))
   names(cv_res) = c("CV")
-
   cv_res = cv_res[order(cv_res$CV),,drop=FALSE]
 
 
@@ -36,7 +28,7 @@ get_CV = function(input_df, df_name){
     ggplot2::geom_point() +
     ggplot2::ggtitle("all PP metabolites CV vs rank")+
     ggplot2::geom_hline(yintercept = 5, linetype = "dashed", color = "red") +
-    #geom_text(aes( -5, 5, label = 5, vjust = -1), size = 3)+
+
     ggplot2::geom_hline(yintercept = 10, linetype = "dashed", color = "red") +
 
     ggplot2::geom_hline(yintercept = 20, linetype = "dashed", color = "red") +
@@ -45,7 +37,5 @@ get_CV = function(input_df, df_name){
 
 
   ggplot2::ggsave(paste(df_name, "metabolites_CV.pdf", sep = " ") )
-
-
 
 }
