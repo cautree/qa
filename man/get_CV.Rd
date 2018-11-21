@@ -4,10 +4,7 @@
 \alias{get_CV}
 \title{A get_CV function}
 \usage{
-get_CV(sample_meta_df, sample_info_df, df_name = "Vital")
-}
-\arguments{
-\item{sample_meta_df, }{sample_info_df}
+get_CV(pp_meta_df, df_name = "Vital")
 }
 \value{
 a ggplot line graph
