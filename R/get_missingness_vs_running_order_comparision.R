@@ -54,10 +54,9 @@ get_missingness_vs_running_order_comparision = function(sample_meta_data, pp_met
 
 
 
-  na_count_samples %>%
-    ggplot2::ggplot(aes(rank, miss, color = subgroup)) +
+  na_count %>%
+    ggplot2::ggplot(aes(rank, miss, color = subgroup, color = group)) +
     ggplot2::geom_point() +
-    ggplot2::facet_wrap(~group)+
     ggplot2::ggtitle("rank vs number of missing and missing percentage") +
     ggplot2::scale_y_continuous(name = expression("missing percentage out of total"),
                                 sec.axis = sec_axis(~ . * 1 / dim(sample_df)[1] ,
