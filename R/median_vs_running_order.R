@@ -9,10 +9,9 @@
 
 get_median_vs_running_order = function(df_input,is_sample=TRUE, df_name="Vital") {
 
+  rownames(df_input) = df_input$plate_well
 
-
-  df_sample = df_input %>%
-    dplyr::select( -plate_well)
+  df_input$plate_well = NULL
 
   df_sample <- df_sample[,colSums(is.na(df_sample))<nrow(df_sample)]
 
