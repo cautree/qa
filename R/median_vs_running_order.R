@@ -1,39 +1,43 @@
-
-
-
-
 #' A median_vs_running_order function
 #'
 #' This function allows you to get median vs running order
 #' @param input_df, input data frame.
+#' @param is_sample, boolean
+#' @param df_name, name for the input data
 #' @return a ggplot scatter graph
 #' @export
 
-get_median_vs_running_order = function(df_input, df_name) {
+get_median_vs_running_order = function(df_input,is_sample=TRUE, df_name) {
 
-  plate_well = df_input$plate_well
+
 
   df_sample = df_input %>%
-    dplyr::select(-year, -subjectId, -plate_well)
+    dplyr::select( -plate_well)
 
-  row_median = apply(df_sample, 1, median, na.rm = TRUE)
+  row_median = as.data.frame( apply(df_sample, 1, median, na.rm = TRUE))
 
-  df_sample$plate_well = plate_well
+  names(row_median) ="row_median"
 
-  df_sample = df_sample %>%
-    tidyr::separate(plate_well, c("plate", "well"))
+  row_median_df = row_median %>%
+    dplyr::mutate(plate_well = rownames(.)) %>%
+    tidyr::separate(plate_well, c("plate", "well")) %>%
+    dplyr::mutate(order =1:dim(.)[1] )
 
-  df_sample$order = 1:dim(df_sample)[1]
-  df_sample$row_median = row_median
-
-
-  df_sample %>%
+  row_median_df %>%
     ggplot2::ggplot(aes(order, row_median, color = plate)) +
     ggplot2::geom_point()+
     ggplot2::ylab("metabolite_median") +
-    ggplot2::ggtitle("metabolite_median vs analysis order of samples")+
+    ggplot2::ggtitle("metabolite_median vs analysis order")+
     ggplot2::theme(plot.title = element_text(hjust = 0.5))
 
-  ggsave(paste(df_name, "median_vs_running_order.pdf", sep=" ") )
+
+  if( is_sample){
+
+  ggsave(paste(df_name, "sample_median_vs_running_order.pdf", sep=" ") )
+
+  }else{
+    ggsave(paste(df_name, "pp_median_vs_running_order.pdf", sep=" ") )
+
+  }
 
 }

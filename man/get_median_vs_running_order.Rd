@@ -4,9 +4,13 @@
 \alias{get_median_vs_running_order}
 \title{A median_vs_running_order function}
 \usage{
-get_median_vs_running_order(df_input, df_name)
+get_median_vs_running_order(df_input, is_sample = TRUE, df_name)
 }
 \arguments{
+\item{is_sample, }{boolean}
+
+\item{df_name, }{name for the input data}
+
 \item{input_df, }{input data frame.}
 }
 \value{

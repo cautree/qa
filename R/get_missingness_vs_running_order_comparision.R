@@ -63,7 +63,7 @@ get_missingness_vs_running_order_comparision = function(sample_meta_data, pp_met
                                                     name = "missing percentage out of total"), limits = c(0, dim(sample_df)[1]))
 
 
-  ggplot2::ggsave(paste(df_name, "missingness compararision between sample and pp.pdf", sep = " "))
+  ggplot2::ggsave(paste(df_name, "missingness comparision between sample and pp.pdf", sep = " "))
 
 
 
