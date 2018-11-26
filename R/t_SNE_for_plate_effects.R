@@ -2,44 +2,34 @@
 #' A make_t_SNE_graph_for_plate_effects function
 #'
 #' This function allows you to see plate effect.
-#' @param input_df, input data frame.
+#' @param df_input, input data frame.
+#' @param is_sample, boolean
+#' @param df_name, name for the input data
 #' @return a r baseplot scatter plot graph
 #' @export
 #'
-make_t_SNE_graph_for_plate_effects = function(input_df, df_name) {
+make_t_SNE_graph_for_plate_effects = function(df_input,is_sample=TRUE, df_name="Vital") {
 
 
-  #only use sample, not pooled plasma
-  input_df = input_df %>%
-    dplyr::filter(!is.na(subjectId))
-
-  rownames(input_df) = input_df$plate_well
-
-  sample_df = input_df %>%
-    dplyr::select(-year, -subjectId, -plate_well)
 
 
-  # sample_df_t = as.data.frame(t(sample_df))
-  #
-  # list= c("Eico_m","FFA","BA","FAH", "Other")
-  #
-  # p_vector =sapply(list, function(x)  length(rownames(sample_df_t)[grep(x, rownames(sample_df_t))])  )
-  #
-  # group_name = unlist(mapply(rep, list, p_vector))
-  #
-  # sample_df_t$labels = as.factor(group_name)
-
-  plates = sapply (input_df$plate_well, function(x) {strsplit(x, "_")[[1]][[1]]} )
+  plates = sapply (df_input$plate_well, function(x) {strsplit(x, "_")[[1]][[1]]} )
   plate_count =length(unique(plates))
 
   list= paste("000", (1:plate_count),"_", sep="")
 
-  p_vector =sapply(list, function(x)  length(rownames(sample_df)[grep(x, rownames(sample_df))])  )
+  p_vector =sapply(list, function(x)  length(df_input$plate_well[grep(x, df_input$plate_well)])  )
 
   group_name = unlist(sapply( 1:plate_count, function(x){   rep(x, p_vector[x])}))
 
+  df_input$plate_well =NULL
 
-  sample_df$labels = as.factor(group_name)
+  # replace NA with 0.25 of min
+  NA2mean <- function(x) replace(x, is.na(x), min(x, na.rm = TRUE)*0.25)
+  df_input<- lapply(df_input, NA2mean)
+
+
+  df_input$labels = as.factor(group_name)
 
 
   ## for plotting

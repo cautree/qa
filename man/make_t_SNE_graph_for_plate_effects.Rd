@@ -4,10 +4,15 @@
 \alias{make_t_SNE_graph_for_plate_effects}
 \title{A make_t_SNE_graph_for_plate_effects function}
 \usage{
-make_t_SNE_graph_for_plate_effects(input_df, df_name)
+make_t_SNE_graph_for_plate_effects(df_input, is_sample = TRUE,
+  df_name = "Vital")
 }
 \arguments{
-\item{input_df, }{input data frame.}
+\item{df_input, }{input data frame.}
+
+\item{is_sample, }{boolean}
+
+\item{df_name, }{name for the input data}
 }
 \value{
 a r baseplot scatter plot graph
