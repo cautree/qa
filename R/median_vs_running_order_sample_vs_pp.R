@@ -15,7 +15,9 @@ get_median_vs_running_order_comparision = function(sample_meta_data, pp_meta_dat
 
   df_sample <- sample_meta_data[,colSums(is.na(sample_meta_data))<nrow(sample_meta_data)]
 
-  row_median_s = as.data.frame( apply(df_sample, 1, median, na.rm = TRUE))
+  df_sample = as.data.frame(t(df_sample))
+
+  row_median_s = as.data.frame( sapply(df_sample, median, na.rm = TRUE))
 
   names(row_median_s) ="row_median"
 
@@ -31,7 +33,9 @@ get_median_vs_running_order_comparision = function(sample_meta_data, pp_meta_dat
 
   df_pp <- pp_meta_data[,colSums(is.na(pp_meta_data))<nrow(pp_meta_data)]
 
-  row_median_p = as.data.frame( apply(df_pp, 1, median, na.rm = TRUE))
+  df_pp = as.data.frame(t(df_pp))
+
+  row_median_p = as.data.frame( sapply(df_pp, median, na.rm = TRUE))
 
   names(row_median_p) ="row_median"
 
