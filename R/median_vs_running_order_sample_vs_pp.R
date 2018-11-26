@@ -9,11 +9,12 @@
 
 get_median_vs_running_order_comparision = function(sample_meta_data, pp_meta_data, df_name="Vital") {
 
-
-  rownames(sample_meta_data) =sample_meta_data$plate_well
-  sample_meta_data$plate_well= NULL
-
   df_sample <- sample_meta_data[,colSums(is.na(sample_meta_data))<nrow(sample_meta_data)]
+
+  rownames(df_sample) =df_sample$plate_well
+  df_sample$plate_well= NULL
+
+
 
   df_sample = as.data.frame(t(df_sample))
 
@@ -23,15 +24,19 @@ get_median_vs_running_order_comparision = function(sample_meta_data, pp_meta_dat
 
   row_median_df_s = row_median_s %>%
     dplyr::mutate(plate_well = rownames(.)) %>%
-    tidyr::separate(plate_well, c("plate", "well")) %>%
-    dplyr::mutate(order =1:dim(.)[1] )%>%
+    tidyr::separate(plate_well, c("plate", "well"), convert=TRUE) %>%
+    dplyr::mutate(order =(plate-1)*96+well )%>%
+    dplyr::mutate(plate = as.factor(plate)) %>%
     dplyr::mutate(group = "sample")
-
-  rownames(pp_meta_data) = pp_meta_data$plate_well
-  pp_meta_data$plate_well= NULL
 
 
   df_pp <- pp_meta_data[,colSums(is.na(pp_meta_data))<nrow(pp_meta_data)]
+
+  rownames(df_pp) =df_pp$plate_well
+  df_pp$plate_well= NULL
+
+
+
 
   df_pp = as.data.frame(t(df_pp))
 
@@ -41,9 +46,11 @@ get_median_vs_running_order_comparision = function(sample_meta_data, pp_meta_dat
 
   row_median_df_p = row_median_p %>%
     dplyr::mutate(plate_well = rownames(.)) %>%
-    tidyr::separate(plate_well, c("plate", "well")) %>%
-    dplyr::mutate(order =1:dim(.)[1] )%>%
+    tidyr::separate(plate_well, c("plate", "well"), convert=TRUE) %>%
+    dplyr::mutate(order =(plate-1)*96+well )%>%
+    dplyr::mutate(plate = as.factor(plate)) %>%
     dplyr::mutate(group = "pp")
+
 
 
   median_df = rbind(row_median_df_s, row_median_df_p)
@@ -55,8 +62,6 @@ get_median_vs_running_order_comparision = function(sample_meta_data, pp_meta_dat
     ggplot2::ylab("metabolite_median") +
     ggplot2::ggtitle("metabolite_median vs analysis order")+
     ggplot2::theme(plot.title = element_text(hjust = 0.5))
-
-
 
 
   ggsave(paste(df_name, "sample_median_running_order_pp_median_running_order_comparision.pdf", sep=" ") )
