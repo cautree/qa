@@ -26,7 +26,7 @@ make_t_SNE_graph_for_plate_effects = function(df_input,is_sample=TRUE, df_name="
 
   # replace NA with 0.25 of min
   NA2mean <- function(x) replace(x, is.na(x), min(x, na.rm = TRUE)*0.25)
-  df_input<- lapply(df_input, NA2mean)
+  df_input[]<- lapply(df_input, NA2mean)
 
 
   df_input$labels = as.factor(group_name)
