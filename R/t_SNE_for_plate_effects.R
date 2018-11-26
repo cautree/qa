@@ -37,7 +37,7 @@ make_t_SNE_graph_for_plate_effects = function(df_input,is_sample=TRUE, df_name="
   names(colors) = unique(group_name)
 
   ## Executing the algorithm on curated data
-  tsne <- Rtsne(sample_df[-dim(sample_df)[2]], dims = 3, theta =0, pca=TRUE,
+  tsne <- Rtsne(df_input[-dim(df_input)[2]], dims = 3, theta =0, pca=TRUE,
                 initial_dims = 200, perplexity=30, eta=100, verbose=TRUE,
                 max_iter = 500 , pca_scale=TRUE)
 
@@ -46,16 +46,16 @@ make_t_SNE_graph_for_plate_effects = function(df_input,is_sample=TRUE, df_name="
 
   pdf(paste( df_name, 'tsne for plate effect.pdf', sep=" " ) )
   plot(tsne$Y[,1], tsne$Y[,2], t='n', main="tsne for plate effect, dim1 vs dim2(each label is a well)")
-  text(tsne$Y[,1], tsne$Y[,2], labels=sample_df$labels, col=colors[sample_df$labels])
+  text(tsne$Y[,1], tsne$Y[,2], labels=df_input$labels, col=colors[df_input$labels])
 
 
 
   plot(tsne$Y[,2], tsne$Y[,3], t='n', main="tsne for plate effect, dim2 vs dim3(each label is a well)")
-  text(tsne$Y[,2], tsne$Y[,3], labels=sample_df$labels, col=colors[sample_df$labels])
+  text(tsne$Y[,2], tsne$Y[,3], labels=df_input$labels, col=colors[df_input$labels])
 
 
   plot(tsne$Y[,1], tsne$Y[,3], t='n', main="tsne for plate effect, dim1 vs dim3(each label is a well)")
-  text(tsne$Y[,1], tsne$Y[,3], labels=sample_df$labels, col=colors[sample_df$labels])
+  text(tsne$Y[,1], tsne$Y[,3], labels=df_input$labels, col=colors[df_input$labels])
 
 
   dev.off()
