@@ -38,7 +38,7 @@ make_t_SNE_graph_for_plate_effects = function(df_input,is_sample=TRUE, df_name="
 
   num =30
 
-  if(!is_smaple){
+  if(!is_sample){
     num =5
   }
 
