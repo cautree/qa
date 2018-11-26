@@ -10,10 +10,10 @@
 get_median_vs_running_order_comparision = function(sample_meta_data, pp_meta_data, df_name="Vital") {
 
 
-  rownames(sample_df) =sample_df$plate_well
-  sample_df$plate_well= NULL
+  rownames(sample_meta_data) =sample_meta_data$plate_well
+  sample_meta_data$plate_well= NULL
 
-  df_sample <- df_sample[,colSums(is.na(df_sample))<nrow(df_sample)]
+  df_sample <- sample_meta_data[,colSums(is.na(sample_meta_data))<nrow(sample_meta_data)]
 
   row_median_s = as.data.frame( apply(df_sample, 1, median, na.rm = TRUE))
 
@@ -25,11 +25,11 @@ get_median_vs_running_order_comparision = function(sample_meta_data, pp_meta_dat
     dplyr::mutate(order =1:dim(.)[1] )%>%
     dplyr::mutate(group = "sample")
 
-  rownames(pp_df) = pp_df$plate_well
-  pp_df$plate_well= NULL
+  rownames(pp_meta_data) = pp_meta_data$plate_well
+  pp_meta_data$plate_well= NULL
 
 
-  df_pp <- pp_df[,colSums(is.na(pp_df))<nrow(pp_df)]
+  df_pp <- pp_meta_data[,colSums(is.na(pp_meta_data))<nrow(pp_meta_data)]
 
   row_median_p = as.data.frame( apply(df_pp, 1, median, na.rm = TRUE))
 
