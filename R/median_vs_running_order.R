@@ -9,23 +9,27 @@
 
 get_median_vs_running_order = function(df_input,is_sample=TRUE, df_name="Vital") {
 
-  rownames(df_input) = df_input$plate_well
+  df_sample <- df_input[,colSums(is.na(df_input))<nrow(df_input)]
 
-  df_input$plate_well = NULL
+  rownames(df_sample) =df_sample$plate_well
+  df_sample$plate_well= NULL
 
-  df_sample <- df_sample[,colSums(is.na(df_sample))<nrow(df_sample)]
 
-  row_median = as.data.frame( apply(df_sample, 1, median, na.rm = TRUE))
+
+  df_sample = as.data.frame(t(df_sample))
+
+  row_median = as.data.frame( sapply(df_sample, median, na.rm = TRUE))
 
   names(row_median) ="row_median"
 
-  row_median_df = row_median %>%
+ median_df = row_median %>%
     dplyr::mutate(plate_well = rownames(.)) %>%
-    tidyr::separate(plate_well, c("plate", "well")) %>%
-    dplyr::mutate(order =1:dim(.)[1] )
+    tidyr::separate(plate_well, c("plate", "well"), convert=TRUE) %>%
+    dplyr::mutate(order =(plate-1)*96+well )%>%
+    dplyr::mutate(plate = as.factor(plate))
 
-  row_median_df %>%
-    ggplot2::ggplot(aes(order, row_median, color = plate)) +
+  median_df %>%
+    ggplot2::ggplot(aes(order, row_median, color = plate, shape = group)) +
     ggplot2::geom_point()+
     ggplot2::ylab("metabolite_median") +
     ggplot2::ggtitle("metabolite_median vs analysis order")+
