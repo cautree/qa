@@ -29,7 +29,7 @@ get_median_vs_running_order = function(df_input,is_sample=TRUE, df_name="Vital")
     dplyr::mutate(plate = as.factor(plate))
 
   median_df %>%
-    ggplot2::ggplot(aes(order, row_median, color = plate, shape = group)) +
+    ggplot2::ggplot(aes(order, row_median, color = plate)) +
     ggplot2::geom_point()+
     ggplot2::ylab("metabolite_median") +
     ggplot2::ggtitle("metabolite_median vs analysis order")+
