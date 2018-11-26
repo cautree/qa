@@ -36,15 +36,26 @@ make_t_SNE_graph_for_plate_effects = function(df_input,is_sample=TRUE, df_name="
   colors = rainbow(length(unique(group_name)))
   names(colors) = unique(group_name)
 
+  num =30
+
+  if(!is_smaple){
+    num =5
+  }
+
   ## Executing the algorithm on curated data
   tsne <- Rtsne(df_input[-dim(df_input)[2]], dims = 3, theta =0, pca=TRUE,
-                initial_dims = 200, perplexity=30, eta=100, verbose=TRUE,
+                initial_dims = 200, perplexity=num, eta=100, verbose=TRUE,
                 max_iter = 500 , pca_scale=TRUE)
 
 
   par(mfrow=c(3,1))
 
-  pdf(paste( df_name, 'tsne for plate effect.pdf', sep=" " ) )
+  if(is_sample){
+
+  pdf(paste( df_name, 'tsne for sample plate effect.pdf', sep=" " ) ) }
+  else{
+    pdf(paste( df_name, 'tsne for pp plate effect.pdf', sep=" " ) )
+  }
   plot(tsne$Y[,1], tsne$Y[,2], t='n', main="tsne for plate effect, dim1 vs dim2(each label is a well)")
   text(tsne$Y[,1], tsne$Y[,2], labels=df_input$labels, col=colors[df_input$labels])
 
