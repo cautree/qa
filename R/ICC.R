@@ -31,16 +31,10 @@ icc_model <- function(df_g) {
 #'
 ICC = function(meta, infor, is_full_set=TRUE, df_name="Vital") {
 
-# head(names(pp_meta_data))
-# tail(names(pp_meta_data))
-#
-#
-# head(names(sample_trt_data))
-# head(names(sample_info_data))
+if(!is_full_set){
+  stop("This is for full data set, for treatment, please use ICC_trt function")
+}
 
-# infor = sample_info_data
-#
-# library(dplyr)
 to_keep = infor %>%
   dplyr::group_by(subjectId) %>%
   dplyr::summarise( count = n()) %>%
@@ -48,16 +42,11 @@ to_keep = infor %>%
   dplyr::left_join( infor, by = "subjectId") %>%
   dplyr::select(-count)
 
-#meta = sample_meta_data
-
 
 meta_keep = meta %>%
   dplyr::right_join( to_keep, by = "plate_well") %>%
   dplyr::arrange(subjectId) %>%
   dplyr::select(-subjectId, - plate_well)
-
-# head(names(meta_keep))
-# tail(names(meta_keep))
 
 meta_keep_long = meta_keep %>%
   tidyr::gather( key = "meta", value = "reading", - year)
