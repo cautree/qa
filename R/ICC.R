@@ -61,7 +61,7 @@ df_res = icc_long %>%
   dplyr::select(-data, - iccs) %>%
   dplyr::arrange(-icc_value)
 
-write.csv(df_res, paste(df_name,"icc_full_data.csv", sep = " ") )
+write.csv(df_res, paste(df_name,"icc.csv", sep = " ") )
 
 }
 
