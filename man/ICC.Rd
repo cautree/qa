@@ -4,12 +4,10 @@
 \alias{ICC}
 \title{An ICC function}
 \usage{
-ICC(meta, infor, is_full_set = TRUE, df_name = "Vital")
+ICC(meta, infor, df_name = "Vital")
 }
 \arguments{
 \item{infor, }{input data frame: metabolites infor}
-
-\item{is_full_set, }{boolean}
 
 \item{df_name, }{name for the input data}
 

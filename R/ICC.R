@@ -24,16 +24,13 @@ icc_model <- function(df_g) {
 #' This function allows you to get ICC.
 #' @param df_input, input data frame: metabolites data
 #' @param infor, input data frame: metabolites infor
-#' @param is_full_set, boolean
 #' @param df_name, name for the input data
 #' @return a r baseplot scatter plot graph
 #' @export
 #'
-ICC = function(meta, infor, is_full_set=TRUE, df_name="Vital") {
+ICC = function(meta, infor, df_name="Vital") {
 
-if(!is_full_set){
-  stop("This is for full data set, for treatment, please use ICC_trt function")
-}
+
 
 to_keep = infor %>%
   dplyr::group_by(subjectId) %>%
