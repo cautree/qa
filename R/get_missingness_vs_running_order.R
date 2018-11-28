@@ -8,7 +8,7 @@
 get_missingness_vs_running_order = function(meta_data, is_sample= TRUE, df_name="Vital" ) {
 
 sample_df = meta_data %>%
-  dplyr::select(-subjectId)
+  dplyr::select(-plate_well)
 
 
   na_count_samples  = as.data.frame(sapply(sample_df, function(y) sum(length(which(is.na(y))))))
