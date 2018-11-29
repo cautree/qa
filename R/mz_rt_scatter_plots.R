@@ -21,17 +21,15 @@ get_group_ = function(s){
 #' create mz_rt scatter plot
 #'
 #' This function loads a file as a dataframe.
+#' @param input_df, input data frame.
 #' @param infile Path to the input file
+#' @param df_name, name for the input data, default is "Vital"
 #' @return a ggplot scatter plot
 #' @export
 #'
 
-create_mz_rt_scatter_plots = function(input_df, df_name) {
+create_mz_rt_scatter_plots = function(input_df, df_name="Vital") {
 
-
-  #only use sample, not pooled plasma
-  input_df = input_df %>%
-    dplyr::filter(!is.na(subjectId))
 
 
   df_data = input_df[,grep("mzid",colnames(input_df))]

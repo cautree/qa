@@ -4,9 +4,13 @@
 \alias{create_mz_rt_scatter_plots}
 \title{create mz_rt scatter plot}
 \usage{
-create_mz_rt_scatter_plots(input_df, df_name)
+create_mz_rt_scatter_plots(input_df, df_name = "Vital")
 }
 \arguments{
+\item{input_df, }{input data frame.}
+
+\item{df_name, }{name for the input data, default is "Vital"}
+
 \item{infile}{Path to the input file}
 }
 \value{
