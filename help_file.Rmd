@@ -21,6 +21,8 @@ sample_clin_data = readr::read_csv("/an/vital/metabolomics/QA/yliu/data_for_QA_p
 #
 pp_meta_data = readr::read_csv( "/an/vital/metabolomics/QA/yliu/data_for_QA_package/pp_meta_data.csv")
 
+sample_delta_data = readr::read_csv("/an/vital/metabolomics/QA/yliu/data_for_QA_package/sample_delta_data.csv")
+
 
 names(sample_meta_data)[1:5]
 
@@ -34,6 +36,8 @@ sample_trt_data$X1= NULL
 pp_meta_data$X1 =NULL
 
 sample_clin_data$X1= NULL
+
+sample_delta_data$X1 =NULL
 
 
 ```
