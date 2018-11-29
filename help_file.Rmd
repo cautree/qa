@@ -15,6 +15,8 @@ sample_info_data = readr::read_csv("/an/vital/metabolomics/QA/yliu/data_for_QA_p
 
 sample_trt_data = readr::read_csv("/an/vital/metabolomics/QA/yliu/data_for_QA_package/trt_data.csv")
 
+sample_clin_data = readr::read_csv("/an/vital/metabolomics/QA/yliu/data_for_QA_package/sample_clin_data.csv")
+
 
 #
 pp_meta_data = readr::read_csv( "/an/vital/metabolomics/QA/yliu/data_for_QA_package/pp_meta_data.csv")
@@ -30,6 +32,8 @@ sample_info_data$X1= NULL
 sample_trt_data$X1= NULL
 
 pp_meta_data$X1 =NULL
+
+sample_clin_data$X1= NULL
 
 
 ```
