@@ -57,7 +57,7 @@ get_median_vs_running_order_comparision = function(sample_meta_data, pp_meta_dat
 
 
   median_df %>%
-    ggplot2::ggplot(aes(order, row_median, color = plate, shape = group)) +
+    ggplot2::ggplot(aes(order, row_median, color = group, shape = plate)) +
     ggplot2::geom_point()+
     ggplot2::ylab("metabolite_median") +
     ggplot2::ggtitle("metabolite_median vs analysis order")+
