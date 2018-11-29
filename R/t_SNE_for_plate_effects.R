@@ -5,11 +5,11 @@
 #' @param df_input, input data frame.
 #' @param is_sample, boolean, default is TRUE
 #' @param df_name, name for the input data, default is "Vital"
-#' @param perplexity, int for perplexity, default is 30
+#' @param perplexity_num, int for perplexity, default is 30
 #' @return a r baseplot scatter plot graph
 #' @export
 #'
-make_t_SNE_graph_for_plate_effects = function(df_input,is_sample=TRUE, perplexity=30, df_name="Vital") {
+make_t_SNE_graph_for_plate_effects = function(df_input,is_sample=TRUE, perplexity_num=30, df_name="Vital") {
 
 
 
@@ -40,7 +40,7 @@ make_t_SNE_graph_for_plate_effects = function(df_input,is_sample=TRUE, perplexit
 
   ## Executing the algorithm on curated data
   tsne <- Rtsne(df_input[-dim(df_input)[2]], dims = 3, theta =0, pca=TRUE,
-                initial_dims = 200, perplexity=perplexity, eta=100, verbose=TRUE,
+                initial_dims = 200, perplexity=perplexity_num, eta=100, verbose=TRUE,
                 max_iter = 500 , pca_scale=TRUE)
 
 

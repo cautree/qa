@@ -5,14 +5,14 @@
 \title{A make_t_SNE_graph_for_plate_effects function}
 \usage{
 make_t_SNE_graph_for_plate_effects(df_input, is_sample = TRUE,
-  perplexity = 30, df_name = "Vital")
+  perplexity_num = 30, df_name = "Vital")
 }
 \arguments{
 \item{df_input, }{input data frame.}
 
 \item{is_sample, }{boolean, default is TRUE}
 
-\item{perplexity, }{int for perplexity, default is 30}
+\item{perplexity_num, }{int for perplexity, default is 30}
 
 \item{df_name, }{name for the input data, default is "Vital"}
 }
