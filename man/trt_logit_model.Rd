@@ -4,17 +4,20 @@
 \alias{trt_logit_model}
 \title{A trt_logit_model  function}
 \usage{
-trt_logit_model(sample_meta_data, sample_trt_data, df_name = "Vital")
+trt_logit_model(sample_delta_data, sample_trt_data,
+  trt = "fishoilactive", df_name = "Vital")
 }
 \arguments{
-\item{sample_meta_data, }{input data frame.}
+\item{sample_trt_data, }{input data frame with treatment info.}
+
+\item{trt, }{string showing trtment, which is a var i nthe sample trt data}
 
 \item{df_name, }{string for data set}
 
-\item{pp_meta_data, }{input data frame.}
+\item{sample_meta_data, }{input data frame with metabolites reading.}
 }
 \value{
-a ggplot scatter graph
+a cvs files with beta and p value for treatment effects
 }
 \description{
 This function allows you to get median vs running order comparision between sample and pp
