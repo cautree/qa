@@ -3,12 +3,13 @@
 #'
 #' This function allows you to see plate effect.
 #' @param df_input, input data frame.
-#' @param is_sample, boolean
-#' @param df_name, name for the input data
+#' @param is_sample, boolean, default is TRUE
+#' @param df_name, name for the input data, default is "Vital"
+#' @param perplexity, int for perplexity, default is 30
 #' @return a r baseplot scatter plot graph
 #' @export
 #'
-make_t_SNE_graph_for_plate_effects = function(df_input,is_sample=TRUE, df_name="Vital") {
+make_t_SNE_graph_for_plate_effects = function(df_input,is_sample=TRUE, perplexity=30, df_name="Vital") {
 
 
 
@@ -36,15 +37,10 @@ make_t_SNE_graph_for_plate_effects = function(df_input,is_sample=TRUE, df_name="
   colors = rainbow(length(unique(group_name)))
   names(colors) = unique(group_name)
 
-  num =30
-
-  if(!is_sample){
-    num =5
-  }
 
   ## Executing the algorithm on curated data
   tsne <- Rtsne(df_input[-dim(df_input)[2]], dims = 3, theta =0, pca=TRUE,
-                initial_dims = 200, perplexity=num, eta=100, verbose=TRUE,
+                initial_dims = 200, perplexity=perplexity, eta=100, verbose=TRUE,
                 max_iter = 500 , pca_scale=TRUE)
 
 

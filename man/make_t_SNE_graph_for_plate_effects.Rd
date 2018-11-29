@@ -5,14 +5,16 @@
 \title{A make_t_SNE_graph_for_plate_effects function}
 \usage{
 make_t_SNE_graph_for_plate_effects(df_input, is_sample = TRUE,
-  df_name = "Vital")
+  perplexity = 30, df_name = "Vital")
 }
 \arguments{
 \item{df_input, }{input data frame.}
 
-\item{is_sample, }{boolean}
+\item{is_sample, }{boolean, default is TRUE}
 
-\item{df_name, }{name for the input data}
+\item{perplexity, }{int for perplexity, default is 30}
+
+\item{df_name, }{name for the input data, default is "Vital"}
 }
 \value{
 a r baseplot scatter plot graph
