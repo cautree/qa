@@ -96,6 +96,6 @@ trt_logit_model_with_age_gender = function(sample_delta_data, sample_trt_data, s
 
   }
 
-  write.csv(logit_report, paste( df_name, "trt_logitwith_age_gender_race_beta_p_value.csv", sep= "_"))
+  write.csv(logit_report, paste( df_name,trt, "logit_with_age_gender_(race)_beta_p_value.csv", sep= "_"))
 
 }

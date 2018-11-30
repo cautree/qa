@@ -2,7 +2,7 @@
 % Please edit documentation in R/trt_logit_model_with_age_sex_gender.R
 \name{trt_logit_model_with_age_gender}
 \alias{trt_logit_model_with_age_gender}
-\title{A trt_logit_model  function}
+\title{A trt_logit_model_with_age_gender  function}
 \usage{
 trt_logit_model_with_age_gender(sample_delta_data, sample_trt_data,
   sample_clin_data, trt = "fishoilactive", df_name = "Vital")
