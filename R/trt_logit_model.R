@@ -16,8 +16,12 @@ trt_logit_model = function(sample_delta_data, sample_trt_data, trt="fishoilactiv
     stop("there is no such treatment!")
   }
 
-  if(! subjectId %in% sample_delta_data){
-    subjectId = "plate_well"
+  if(! "subjectId" %in% sample_delta_data){
+    sample_delta_data = sample_delta_data %>%
+      dplyr::rename(subjectId = plate_well)
+
+    sample_trt_data = sample_trt_data %>%
+      dplyr::rename(subjectId = plate_well)
   }
 
   sample_trt_data = sample_trt_data %>%
