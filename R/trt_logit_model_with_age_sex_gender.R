@@ -68,7 +68,7 @@ trt_logit_model_with_age_gender = function(sample_delta_data, sample_trt_data, s
 
   if( "race" %in% names(sample_clin_data)){
   logit_report = sample_delta_data_with_trt %>%
-    tidyr::gather(key="meta", value="meta_reading",  -trt, - age, -sex, - race) %>%
+    tidyr::gather(key="meta", value="meta_reading",  -trt, - age, -gender, - race) %>%
     dplyr::group_by(meta) %>%
     do(broom::tidy( glm(  paste(trt, paste(meta_reading, age, gender, race, sep="+" ), sep="~"), data= .,  family = binomial))) %>%
     dplyr::filter( term == "meta_reading") %>%
@@ -81,7 +81,7 @@ trt_logit_model_with_age_gender = function(sample_delta_data, sample_trt_data, s
   } else{
 
     logit_report = sample_delta_data_with_trt %>%
-      tidyr::gather(key="meta", value="meta_reading",  -trt, - age, -sex) %>%
+      tidyr::gather(key="meta", value="meta_reading",  -trt,-age, - gender) %>%
       dplyr::group_by(meta) %>%
       do(broom::tidy( glm( paste(trt, paste(meta_reading, age, gender, sep="+" ), sep="~"), data= .,  family = binomial))) %>%
       dplyr::filter( term == "meta_reading") %>%
