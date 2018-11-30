@@ -41,11 +41,15 @@ trt_logit_model_with_age_gender = function(sample_delta_data, sample_trt_data, s
   if( "race" %in% names(sample_clin_data)){
 
   sample_clin_data_1 =sample_clin_data %>%
-    dplyr::select(subjectId, age, gender, race)}
+    dplyr::select(subjectId, age, gender, race) %>%
+    dplyr::mutate( gender = as.factor(gender),
+                   race = as.factor(race))}
 
   else{
     sample_clin_data_1 =sample_clin_data %>%
-      dplyr::select(subjectId, age, gender)}
+      dplyr::select(subjectId, age, gender)%>%
+      dplyr::mutate( gender = as.factor(gender)
+                     )}
 
 
 
@@ -56,9 +60,7 @@ trt_logit_model_with_age_gender = function(sample_delta_data, sample_trt_data, s
 
 
   sample_delta_data_with_trt = sample_delta_data %>%
-    dplyr::left_join( sample_trt_data, by ="subjectId") %>%
-    dplyr::mutate( gender = as.factor(gender),
-                   race = as.factor(race)) %>%
+    dplyr::left_join( sample_trt_data, by ="subjectId")
     dplyr::select(-subjectId)
 
   meta_reading = "meta_reading"
