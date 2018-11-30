@@ -38,7 +38,7 @@ trt_logit_model_with_age_gender = function(sample_delta_data, sample_trt_data, s
   }
 
 
-  if( race %in% names(sample_clin_data)){
+  if( "race" %in% names(sample_clin_data)){
 
   sample_clin_data_1 =sample_clin_data %>%
     dplyr::select(subjectId, age, gender, race)}
@@ -66,7 +66,7 @@ trt_logit_model_with_age_gender = function(sample_delta_data, sample_trt_data, s
   gender = "gender"
   race = "race"
 
-  if( race %in% names(sample_clin_data)){
+  if( "race" %in% names(sample_clin_data)){
   logit_report = sample_delta_data_with_trt %>%
     tidyr::gather(key="meta", value="meta_reading",  -trt, - age, -sex, - race) %>%
     dplyr::group_by(meta) %>%
