@@ -1,6 +1,8 @@
 
 get_mz_ = function(s){
-  a=strsplit(s,"_")
+
+  b=tidyr::extract_numeric(s)
+  b
   b= a[[1]][3]
   return(b)
 }

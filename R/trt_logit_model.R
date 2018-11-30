@@ -16,16 +16,17 @@ trt_logit_model = function(sample_delta_data, sample_trt_data, trt="fishoilactiv
   }
 
   sample_trt_data = sample_trt_data %>%
-    dplyr::select(subjectId, trt)
+    dplyr::select(subjectId, noquote(trt))
 
   sample_delta_data_with_trt = sample_delta_data %>%
-    dplyr::left_join( sample_trt_data, by ="subjectId")
+    dplyr::left_join( sample_trt_data, by ="subjectId") %>%
+    dplyr::select(-subjectId)
 
 
   logit_report = sample_delta_data_with_trt %>%
-    tidyr::gather(key="meta", value="meta_reading", -subjectId, -fishoilactive) %>%
+    tidyr::gather(key="meta", value="meta_reading", -noquote(trt)) %>%
     dplyr::group_by(meta) %>%
-    do(broom::tidy( glm( fishoilactive ~ meta_reading, data= .,  family = binomial))) %>%
+    do(broom::tidy( glm( noquote(trt) ~ meta_reading, data= .,  family = binomial))) %>%
     dplyr::filter( term == "meta_reading") %>%
     dplyr::select(estimate, p.value, meta) %>%
     dplyr::rename( beta = estimate,
