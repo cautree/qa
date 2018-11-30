@@ -11,12 +11,13 @@
 trt_logit_model = function(sample_delta_data, sample_trt_data, trt="fishoilactive", df_name="Vital") {
 
 
+
   if(!trt %in% names(sample_trt_data)){
     stop("there is no such treatment!")
   }
 
   sample_trt_data = sample_trt_data %>%
-    dplyr::select(subjectId, noquote(trt))
+    dplyr::select(subjectId, trt)
 
   sample_delta_data_with_trt = sample_delta_data %>%
     dplyr::left_join( sample_trt_data, by ="subjectId") %>%
@@ -24,9 +25,13 @@ trt_logit_model = function(sample_delta_data, sample_trt_data, trt="fishoilactiv
 
 
   logit_report = sample_delta_data_with_trt %>%
-    tidyr::gather(key="meta", value="meta_reading", -noquote(trt)) %>%
-    dplyr::group_by(meta) %>%
-    do(broom::tidy( glm( noquote(trt) ~ meta_reading, data= .,  family = binomial))) %>%
+    tidyr::gather(key="meta", value="meta_reading", -trt) %>%
+    dplyr::group_by(meta)
+
+  meta_reading = "meta_reading"
+
+  logit_report = logit_report %>%
+    do(broom::tidy( glm( paste(trt, meta_reading, sep="~"), data= .,  family = binomial))) %>%
     dplyr::filter( term == "meta_reading") %>%
     dplyr::select(estimate, p.value, meta) %>%
     dplyr::rename( beta = estimate,
@@ -38,3 +43,5 @@ trt_logit_model = function(sample_delta_data, sample_trt_data, trt="fishoilactiv
   write.csv(logit_report, paste( df_name, "trt_logit_beta_p_value.csv", sep= "_"))
 
 }
+
+
