@@ -20,6 +20,10 @@ trt_logit_model = function(sample_delta_data, sample_trt_data, trt="fishoilactiv
     sample_delta_data = sample_delta_data %>%
       dplyr::rename(subjectId = plate_well)
 
+
+  }
+
+  if(! "subjectId" %in% sample_trt_data){
     sample_trt_data = sample_trt_data %>%
       dplyr::rename(subjectId = plate_well)
   }
