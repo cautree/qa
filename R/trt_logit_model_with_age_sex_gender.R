@@ -64,7 +64,7 @@ trt_logit_model_with_age_gender = function(sample_delta_data, sample_trt_data, s
 
 
   sample_delta_data_with_trt = sample_delta_data %>%
-    dplyr::left_join( sample_trt_data, by ="subjectId")
+    dplyr::left_join( sample_trt_data, by ="subjectId") %>%
     dplyr::select(-subjectId)
 
   meta_reading = "meta_reading"
