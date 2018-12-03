@@ -11,26 +11,22 @@
 
 trt_logit_model_with_age_gender = function(sample_delta_data, sample_trt_data, sample_clin_data, trt="fishoilactive", df_name="Vital") {
 
-  head(names(sample_delta_data))
-  tail(names(sample_delta_data))
 
-  head(names(sample_trt_data))
-  tail(names(sample_trt_data))
-
-  head(names(sample_clin_data))
-  tail(names(sample_clin_data))
 
   if(! "subjectId" %in% names(sample_delta_data)){
-
     sample_delta_data = sample_delta_data %>%
       dplyr::rename(subjectId = plate_well)
+  }
 
+
+  if(! "subjectId" %in% names(sample_trt_data)){
     sample_trt_data = sample_trt_data %>%
       dplyr::rename(subjectId = plate_well)
+  }
 
+  if(! "subjectId" %in% names(sample_clin_data)){
     sample_clin_data =sample_clin_data %>%
       dplyr::rename(subjectId = plate_well)
-
   }
 
 
