@@ -11,6 +11,15 @@ get_median_vs_running_order = function(df_input,is_sample=TRUE, df_name="Vital")
 
   df_sample <- df_input[,colSums(is.na(df_input))<nrow(df_input)]
 
+  if("order" %in% names(df_input)){
+
+    df_input = df_input %>%
+      tidyr::separate(plate_well, c(plate, well), "_") %>%
+      dplyr::mutate( plate_well = paste(order, well, sep="_")) %>%
+      dplyr::select(-order)
+
+  }
+
   rownames(df_sample) =df_sample$plate_well
   df_sample$plate_well= NULL
 

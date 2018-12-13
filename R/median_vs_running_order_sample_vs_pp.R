@@ -11,6 +11,8 @@ get_median_vs_running_order_comparision = function(sample_meta_data, pp_meta_dat
 
   df_sample <- sample_meta_data[,colSums(is.na(sample_meta_data))<nrow(sample_meta_data)]
 
+
+
   rownames(df_sample) =df_sample$plate_well
   df_sample$plate_well= NULL
 
