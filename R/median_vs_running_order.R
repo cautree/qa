@@ -24,7 +24,7 @@ get_median_vs_running_order = function(df_input,is_sample=TRUE, df_name="Vital")
   df_sample$plate_well= NULL
 
 
-
+#########note
   df_sample = as.data.frame(t(df_sample))
 
   row_median = as.data.frame( sapply(df_sample, median, na.rm = TRUE))
