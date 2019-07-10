@@ -15,7 +15,12 @@ icc_model <- function(df_g) {
 }
 
 
+<<<<<<< HEAD
 ## wachwu comment on wachwu branch
+=======
+##wachwu change from master branch
+## I have more changes, this is a test
+>>>>>>> 49d5582642a1e69197295012bc2e64402685d9e7
 
 
 
