@@ -29,6 +29,7 @@ icc_model <- function(df_g) {
 
 
 
+
 #' An ICC function
 #'
 #' This function allows you to get ICC.
