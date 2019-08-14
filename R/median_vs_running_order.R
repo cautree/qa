@@ -30,27 +30,30 @@ get_median_vs_running_order = function(df_input,is_sample=TRUE, df_name="Vital")
   row_median = as.data.frame( sapply(df_sample, median, na.rm = TRUE))
 
   names(row_median) ="row_median"
-
  median_df = row_median %>%
     dplyr::mutate(plate_well = rownames(.)) %>%
     tidyr::separate(plate_well, c("plate", "well"), convert=TRUE) %>%
     dplyr::mutate(order =(plate-1)*96+well )%>%
     dplyr::mutate(plate = as.factor(plate))
 
-  median_df %>%
-    ggplot2::ggplot(aes(order, row_median, color = plate)) +
-    ggplot2::geom_point()+
-    ggplot2::ylab("metabolite_median") +
-    ggplot2::ggtitle("metabolite_median vs analysis order")+
+ print(str(median_df))
+ 
+  plt <- median_df %>%
+    ggplot2::ggplot(aes(order, row_median, color = plate)) + 
+    ggplot2::geom_point() +
+    ggplot2::xlab("runorder") +
+    ggplot2::ylab("median of metabolites in each well") +
+    ggplot2::ggtitle("Median by Well vs Runorder")+
     ggplot2::theme(plot.title = element_text(hjust = 0.5))
 
+ 
 
   if( is_sample){
 
-  ggsave(paste(df_name, "sample_median_vs_running_order.pdf", sep=" ") )
+  ggsave(paste(df_name, "sample_median_vs_running_order.pdf", sep=" "), plot=plt)
 
   }else{
-    ggsave(paste(df_name, "pp_median_vs_running_order.pdf", sep=" ") )
+    ggsave(paste(df_name, "pp_median_vs_running_order.pdf", sep=" "), plot=plt)
 
   }
 
