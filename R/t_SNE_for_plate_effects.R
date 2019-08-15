@@ -12,8 +12,6 @@
 make_t_SNE_graph_for_plate_effects = function(df_input,is_sample=TRUE, perplexity_num=30, df_name="Vital") {
 
 
-
-
   plates = sapply (df_input$plate_well, function(x) {strsplit(x, "_")[[1]][[1]]} )
   plate_count =length(unique(plates))
 
@@ -25,10 +23,10 @@ make_t_SNE_graph_for_plate_effects = function(df_input,is_sample=TRUE, perplexit
 
   df_input$plate_well =NULL
 
+
   # replace NA with 0.25 of min
   NA2mean <- function(x) replace(x, is.na(x), min(x, na.rm = TRUE)*0.25)
   df_input[]<- lapply(df_input, NA2mean)
-
 
   df_input$labels = as.factor(group_name)
 
@@ -44,28 +42,23 @@ make_t_SNE_graph_for_plate_effects = function(df_input,is_sample=TRUE, perplexit
                 max_iter = 500 , pca_scale=TRUE)
 
 
-  par(mfrow=c(3,1))
-
   if(is_sample){
-
-  pdf(paste( df_name, 'tsne for sample plate effect.pdf', sep=" " ) ) }
+    pdf(paste( df_name, 'tsne for sample plate effect.pdf', sep=" " ) ) }
   else{
-    pdf(paste( df_name, 'tsne for pp plate effect.pdf', sep=" " ) )
-  }
-  plot(tsne$Y[,1], tsne$Y[,2], t='n', main="tsne for plate effect, dim1 vs dim2(each label is a well)")
-  text(tsne$Y[,1], tsne$Y[,2], labels=df_input$labels, col=colors[df_input$labels])
+    pdf(paste( df_name, 'tsne for pp plate effect.pdf', sep=" " ) ) }
 
 
+  layout(matrix(c(1,2,3,0,4,0), ncol=3, byrow=TRUE), heights=c(4, 1), widths=c(4,4,4), respect=T)
+  par(mai=rep(0.6, 4))
+  plot(tsne$Y[,1], tsne$Y[,2], t='p', col=colors[df_input$labels], pch=20)
+  plot(tsne$Y[,2], tsne$Y[,3], t='p', col=colors[df_input$labels], pch=20)
+  plot(tsne$Y[,1], tsne$Y[,3], t='p', col=colors[df_input$labels], pch=20)
+  title(main="t-SNE Clustering of Wells by Plate", outer=T, line=-17)
 
-  plot(tsne$Y[,2], tsne$Y[,3], t='n', main="tsne for plate effect, dim2 vs dim3(each label is a well)")
-  text(tsne$Y[,2], tsne$Y[,3], labels=df_input$labels, col=colors[df_input$labels])
-
-
-  plot(tsne$Y[,1], tsne$Y[,3], t='n', main="tsne for plate effect, dim1 vs dim3(each label is a well)")
-  text(tsne$Y[,1], tsne$Y[,3], labels=df_input$labels, col=colors[df_input$labels])
-
+  par(mai=c(0,0,0,0))
+  plot.new()
+  legend(x="center", legend=names(colors), title="Plates", horiz=T, pch=20, col=colors, bty="n")
 
   dev.off()
-
 
 }
