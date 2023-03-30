@@ -12,7 +12,7 @@ get_CV = function(pp_meta_df, df_name="Vital"){
     dplyr::select( -plate_well )
   
   
-  cv_res = as.data.frame(sapply(input_df, raster::cv))
+  
   
   sd_val <- sapply(input_df, sd, na.rm = T)
   
